@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/sdwolfe32/slimhttp.svg?style=svg)](https://circleci.com/gh/sdwolfe32/slimhttp)
 [![GoDoc](https://godoc.org/github.com/sdwolfe32/slimhttp?status.svg)](https://godoc.org/github.com/sdwolfe32/slimhttp)
 
-slimhttp is a very simple API wrapper library used for writing JSON/XML services quickly.
+slimhttp is a simple API library used for writing JSON/XML services quickly and easily. It was written with the aim of providing a go-kit like service definition (slimhttp.Endpoint) while avoiding all the extra RPC logic and encoder/decoder interfaces. The purpose of this project is to implement of a lot of the basic boilerplate associated with writing API services so that you can focus on writing business logic.
 
 ## Usage Example
 
