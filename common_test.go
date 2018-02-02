@@ -20,10 +20,7 @@ type testStruct struct {
 
 // newTestRouter will generate a simple JSON router to test with
 func newTestRouter() *router {
-	return &router{
-		router: mux.NewRouter(),
-		encode: encodeJSON,
-	}
+	return &router{router: mux.NewRouter()}
 }
 
 // newTestStruct generates a lightly populated TestStruct for

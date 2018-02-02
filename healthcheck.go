@@ -6,37 +6,36 @@ import (
 	"github.com/Sirupsen/logrus"
 )
 
-// Healthchecker defines all functionality for a healtcheck
-// service
-type Healthchecker interface {
+// HealthcheckService defines all functionality for a healtcheckService
+type HealthcheckService interface {
 	Healthcheck(r *http.Request) (interface{}, error)
 }
 
-// healthchecker contains all dependencies for a Healthchecker
-type healthchecker struct {
+// healthcheckService contains all dependencies for a HealthcheckService
+type healthcheckService struct {
 	log      *logrus.Entry
 	hostname string
 }
 
-// NewHealthchecker generates a new Healthchecker service
-func NewHealthchecker(log *logrus.Logger, hostname string) Healthchecker {
-	return &healthchecker{
-		log:      log.WithField("service", "lookup"),
+// NewHealthcheckService generates a new Healthchecker service
+func NewHealthcheckService(log *logrus.Logger, hostname string) HealthcheckService {
+	return &healthcheckService{
+		log:      log.WithField("service", "healthcheck"),
 		hostname: hostname,
 	}
 }
 
-// healthcheck represents the response to a healthcheck request
-type healthcheck struct {
+// HealthcheckResponse is the response to a healthcheck request
+type HealthcheckResponse struct {
 	Status   string `json:"status" xml:"status"`
 	Hostname string `json:"hostname" xml:"hostname"`
 }
 
-// Healthcheck handles and returns a 200 as well as a fully populated
-// and encoded healthcheck body
-func (s *healthchecker) Healthcheck(r *http.Request) (interface{}, error) {
+// Healthcheck handles and returns a healthcheck request, returning
+// a 200 as well as a fully populated HealthcheckResponse
+func (s *healthcheckService) Healthcheck(r *http.Request) (interface{}, error) {
 	l := s.log.WithField("handler", "Healthcheck")
 	l.Debug("New Healthcheck request received")
 	l.Debug("Returning newly generated Healthcheck")
-	return &healthcheck{Status: "OK", Hostname: s.hostname}, nil
+	return &HealthcheckResponse{Status: "OK", Hostname: s.hostname}, nil
 }

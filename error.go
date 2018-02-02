@@ -3,8 +3,18 @@ package slimhttp
 import (
 	"encoding/xml"
 	"fmt"
+	"net/http"
 
 	"github.com/Sirupsen/logrus"
+)
+
+var (
+	ErrorBadRequest          = NewError("Bad Request", http.StatusBadRequest, nil)
+	ErrorBadGateway          = NewError("Bad Gateway", http.StatusBadGateway, nil)
+	ErrorForbidden           = NewError("Forbidden", http.StatusForbidden, nil)
+	ErrorMovedPermanently    = NewError("Moved Permanently", http.StatusMovedPermanently, nil)
+	ErrorNotFound            = NewError("Not Found", http.StatusNotFound, nil)
+	ErrorInternalServerError = NewError("Internal Server Error", http.StatusInternalServerError, nil)
 )
 
 // Error is a standard API error that should be used for

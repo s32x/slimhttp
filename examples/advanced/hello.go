@@ -10,54 +10,52 @@ import (
 	"github.com/sdwolfe32/slimhttp"
 )
 
-// Helloer defines all functionality for a Helloer
-// service
-type Helloer interface {
+// HelloService defines all functionality for a helloService
+type HelloService interface {
 	Hello(r *http.Request) (interface{}, error)
 }
 
-// helloer contains all dependencies for a Helloer
-type helloer struct{ log *logrus.Entry }
+// helloService contains all dependencies for a HelloService
+type helloService struct{ log *logrus.Entry }
 
-// NewHelloer generates a new Helloer service
-func NewHelloer(log *logrus.Logger) Helloer {
-	return &helloer{log: log.WithField("service", "helloer")}
+// NewHelloService generates a new HelloService
+func NewHelloService(log *logrus.Logger) HelloService {
+	return &helloService{log: log.WithField("service", "hello")}
 }
 
-// Output is an example output struct that will be
-// encoded to JSON on the response
-type Output struct {
+// HelloResponse is an example response struct that will be
+// encoded to JSON on a Hello request
+type HelloResponse struct {
 	Message string `json:"message"`
 	Success bool   `json:"success"`
 }
 
-// Hello is an example Endpoint method. It receives a
-// request so that you have access to everything on the
-// request and returns a successful body or error
-func (h *helloer) Hello(r *http.Request) (interface{}, error) {
+// Hello is an example Endpoint method. It receives a request
+// so that you have access to everything on the request and
+// returns a successful body or error
+func (h *helloService) Hello(r *http.Request) (interface{}, error) {
 	h.log.Debug("New Hello request received")
 	name := mux.Vars(r)["name"] // The name passed on the request
 	l := h.log.WithField("name", name)
 
-	// "fancy-error" as the name invokes and returns a fully
-	// encoded slimhttp.Error which is created here
-	if name == "fancy-error" {
-		err := errors.New("This is a fancy error")
-		return nil, slimhttp.NewError("There's a very bad error!", http.StatusBadRequest, err).Log(l)
-	}
-
-	// "basic-error" as the name invokes and returns a fully
-	// encoded slimhttp.Error that is generated in the wrapper
-	if name == "basic-error" {
+	switch name {
+	case "basic-error":
+		// An example of returning a raw error (no logging)
 		err := errors.New("This is a basic error")
-		l.WithError(err).Error(err)
 		return nil, err
+	case "standard-error":
+		// An example of logging and returning a predefined Error
+		return nil, slimhttp.ErrorBadRequest.Log(l)
+	case "fancy-error":
+		// An example of logging and returning a fully self-defined Error
+		err := errors.New("This is a fancy error")
+		return nil, slimhttp.NewError("This is a fancy error!", http.StatusBadRequest, err).Log(l)
 	}
 
 	// All other names will pass through and return a fully
 	// encoded Output
 	l.Debug("Returning new Output response")
-	return &Output{
+	return &HelloResponse{
 		Message: fmt.Sprintf("Hello %s!", name),
 		Success: true,
 	}, nil
