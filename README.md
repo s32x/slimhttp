@@ -5,6 +5,16 @@
 
 slimhttp is a simple API library used for writing JSON/XML services quickly and easily. It was written with the aim of providing a go-kit like service definition (slimhttp.Endpoint) while avoiding all the extra RPC logic and encoder/decoder interfaces. The purpose of this project is to implement of a lot of the basic boilerplate associated with writing API services so that you can focus on writing business logic.
 
+## Why?
+
+The heart of slimhttp is the Endpoint type. All your endpoints from now on will take the form of the below function signature.
+
+```
+type Endpoint func(*http.Request) (interface{}, error)
+```
+
+The use of an http.HandlerFunc was the driving force behind writing this library. Satisfying the http.HandlerFunc type (including all encoding and error checking in the same function) was not something I was a fan of and thus came up with above type to make things a little more straightforward. Using the new Endpoint type above now gives you the ability to offload all encoding and error handling to this library, making the process of implementing business logic a little cleaner.
+
 ## A Note
 
 This is only the beginning for this project. I understand it is extremely basic and that is sort of the point. If there's something you'd really like to see implemented which you use normally in your API logic, I'd love to hear about it! - Post an issue or a pull-request.
