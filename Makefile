@@ -1,6 +1,3 @@
-NOVENDOR_PATH = $$(glide novendor)
-.PHONY: test
-
 glide:
 	-rm glide.lock
 	-rm glide.yaml
@@ -10,5 +7,4 @@ glide:
 	glide install
 
 test:
-	go clean
-	go test ${NOVENDOR_PATH}
+	go test

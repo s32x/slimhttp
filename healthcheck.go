@@ -1,43 +1,42 @@
 package slimhttp
 
-// import (
-// 	"net/http"
+import (
+	"net/http"
 
-// 	"github.com/Sirupsen/logrus"
-// 	"github.com/sdwolfe32/trumail/verifier"
-// )
+	"github.com/Sirupsen/logrus"
+)
 
-// // Lookuper defines all functionality for an email verification
-// // lookup API service
-// type Lookuper interface {
-// 	Healthcheck(r *http.Request) (interface{}, error)
-// }
+// Healthchecker defines all functionality for a healtcheck
+// service
+type Healthchecker interface {
+	Healthcheck(r *http.Request) (interface{}, error)
+}
 
-// // lookuper contains all dependencies for a Lookuper
-// type lookuper struct {
-// 	log      *logrus.Entry
-// 	hostname string
-// }
+// healthchecker contains all dependencies for a Healthchecker
+type healthchecker struct {
+	log      *logrus.Entry
+	hostname string
+}
 
-// // NewLookuper generates a new email verification lookup API service
-// func NewLookuper(log *logrus.Logger, hostname, sourceAddr string) Lookuper {
-// 	return &lookuper{
-// 		log:      log.WithField("service", "lookup"),
-// 		hostname: hostname,
-// 		ever:     verifier.NewVerifier(maxWorkerCount, hostname, sourceAddr),
-// 	}
-// }
+// NewHealthchecker generates a new Healthchecker service
+func NewHealthchecker(log *logrus.Logger, hostname string) Healthchecker {
+	return &healthchecker{
+		log:      log.WithField("service", "lookup"),
+		hostname: hostname,
+	}
+}
 
-// // healthcheck represents the response to a healthcheck request
-// type healthcheck struct {
-// 	Status   string `json:"status" xml:"status"`
-// 	Hostname string `json:"hostname" xml:"hostname"`
-// }
+// healthcheck represents the response to a healthcheck request
+type healthcheck struct {
+	Status   string `json:"status" xml:"status"`
+	Hostname string `json:"hostname" xml:"hostname"`
+}
 
-// // GetHealthcheck handles and returns a 200 and our hostname
-// func (s *lookuper) Healthcheck(r *http.Request) (interface{}, error) {
-// 	l := s.log.WithField("handler", "Healthcheck")
-// 	l.Info("New Healthcheck request received")
-// 	l.Info("Returning newly generated Healthcheck")
-// 	return &healthcheck{Status: "OK", Hostname: s.hostname}, nil
-// }
+// Healthcheck handles and returns a 200 as well as a fully populated
+// and encoded healthcheck body
+func (s *healthchecker) Healthcheck(r *http.Request) (interface{}, error) {
+	l := s.log.WithField("handler", "Healthcheck")
+	l.Debug("New Healthcheck request received")
+	l.Debug("Returning newly generated Healthcheck")
+	return &healthcheck{Status: "OK", Hostname: s.hostname}, nil
+}

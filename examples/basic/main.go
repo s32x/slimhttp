@@ -21,7 +21,7 @@ func main() {
 	r := slimhttp.NewJSONRouter()
 
 	// Bind an Endpoint to the router at the specified path
-	r.HandleEndpoint("/{name}/", Hello)
+	r.HandleEndpoint("/hello/{name}/", Hello)
 
 	// Start the service!
 	r.ListenAndServe("8080")
