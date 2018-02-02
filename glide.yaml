@@ -1,0 +1,5 @@
+package: github.com/sdwolfe32/slimhttp
+import:
+- package: github.com/Sirupsen/logrus
+- package: github.com/gorilla/handlers
+- package: github.com/gorilla/mux

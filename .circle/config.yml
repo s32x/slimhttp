@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  build:
+    working_directory: /go/src/github.com/sdwolfe32/slimhttp
+    docker:
+      - image: circleci/golang:1.9.3
+    steps:
+      - checkout
+      - run:
+          name: Install Glide
+          command: go get github.com/Masterminds/glide
+      - run:
+          name: Download vendored Go dependencies
+          command: glide install
+      - run:
+          name: Run unit tests
+          command: make test
