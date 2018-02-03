@@ -11,9 +11,9 @@ import (
 )
 
 func main() {
-	r := slimhttp.NewRouter()                     // Create a new router
-	r.HandleJSONEndpoint("/hello/{name}/", Hello) // Bind an Endpoint to the router at the specified path
-	log.Fatal(r.ListenAndServe(8080))             // Start the service!
+	r := slimhttp.NewRouter()                                // Create a new router
+	r.HandleJSONEndpoint("/hello/{name}/", Hello)            // Bind an Endpoint to the router at the specified path
+	log.Fatal(r.ListenAndServeFreeTLS("hello.com", "certs")) // Start the service with LetsEncrypt certs!
 }
 
 // HelloResponse is an example response struct that will be

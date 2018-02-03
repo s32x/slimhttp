@@ -29,6 +29,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -38,7 +39,7 @@ import (
 func main() {
 	r := slimhttp.NewRouter()                     // Create a new router
 	r.HandleJSONEndpoint("/hello/{name}/", Hello) // Bind an Endpoint to the router at the specified path
-	r.ListenAndServe("8080")                      // Start the service!
+	log.Fatal(r.ListenAndServe(8080))             // Start the service!
 }
 
 // HelloResponse is an example response struct that will be

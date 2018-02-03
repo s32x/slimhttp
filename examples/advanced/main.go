@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/Sirupsen/logrus"
 
 	"github.com/sdwolfe32/slimhttp"
@@ -19,5 +21,5 @@ func main() {
 	r.HandleJSONEndpoint("/hello/{name}/", s.Hello)
 
 	// Start the service!
-	r.ListenAndServe("8080")
+	log.Fatal(r.ListenAndServe(8080))
 }
