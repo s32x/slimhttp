@@ -3,9 +3,9 @@ package slimhttp
 import (
 	"encoding/xml"
 	"io/ioutil"
-	"net/http"
 	"net/http/httptest"
 	"testing"
+	"text/template"
 )
 
 // testStruct is an example of a json/xml response
@@ -26,14 +26,14 @@ func newTestStruct() *testStruct {
 	}
 }
 
-// newTestTextEndpoint is a sample implementation of an Endpoint
-func newTestTextEndpoint(r *http.Request) (interface{}, error) {
-	return "Here's some text!", nil
-}
-
-// newTestStructEndpoint is a sample implementation of an Endpoint
-func newTestStructEndpoint(r *http.Request) (interface{}, error) {
-	return newTestStruct(), nil
+// newTestWebpage generates a lightly populated Webpage for
+// use when testing Webpage encoders
+func newTestWebpage() *Webpage {
+	temp, _ := template.New("test").Parse("<string-test>{{.StringKey}}</string-test><br/><int-test>{{.IntKey}}</int-test><br/><float-test>{{.FloatKey}}</float-test>")
+	return &Webpage{
+		Template: temp,
+		Data:     newTestStruct(),
+	}
 }
 
 // result receives an httptest.ResponseRecorder, computes the

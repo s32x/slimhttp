@@ -17,7 +17,7 @@ func main() {
 
 	// Bind an Endpoint to the router at the specified path
 	r.HandleJSONEndpoint("/healtcheck", h.Healthcheck)
-	r.HandleJSONEndpoint("/hello/{name}/", s.Hello)
+	r.HandleJSONEndpoint("/hello/{name}", s.Hello)
 
 	// Start the service!
 	log.Fatal(r.ListenAndServe(8080))

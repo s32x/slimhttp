@@ -6,7 +6,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// HealthcheckService defines all functionality for a healtcheckService
+// HealthcheckService defines all functionality for a healthcheckService
 type HealthcheckService interface {
 	Healthcheck(r *http.Request) (interface{}, error)
 }

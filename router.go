@@ -49,11 +49,6 @@ func (r *Router) HandleEndpoint(pattern string, endpoint Endpoint, encoder Encod
 	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encoder))
 }
 
-// HandleTextEndpoint binds a new Text Endpoint handler to the router
-func (r *Router) HandleTextEndpoint(pattern string, endpoint Endpoint) *mux.Route {
-	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeText))
-}
-
 // HandleJSONEndpoint binds a new JSON Endpoint handler to the router
 func (r *Router) HandleJSONEndpoint(pattern string, endpoint Endpoint) *mux.Route {
 	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeJSON))
@@ -62,6 +57,16 @@ func (r *Router) HandleJSONEndpoint(pattern string, endpoint Endpoint) *mux.Rout
 // HandleXMLEndpoint binds a new XML Endpoint handler to the router
 func (r *Router) HandleXMLEndpoint(pattern string, endpoint Endpoint) *mux.Route {
 	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeXML))
+}
+
+// HandleTextEndpoint binds a new Text Endpoint handler to the router
+func (r *Router) HandleTextEndpoint(pattern string, endpoint Endpoint) *mux.Route {
+	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeText))
+}
+
+// HandleHTMLEndpoint binds a new HTML Endpoint handler to the router
+func (r *Router) HandleHTMLEndpoint(pattern string, endpoint Endpoint) *mux.Route {
+	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeHTML))
 }
 
 // ListenAndServe assigns the router and address to the routers
