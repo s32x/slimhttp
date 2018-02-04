@@ -26,8 +26,13 @@ func newTestStruct() *testStruct {
 	}
 }
 
-// newTestEndpoint is a sample implementation of an Endpoint
-func newTestEndpoint(r *http.Request) (interface{}, error) {
+// newTestTextEndpoint is a sample implementation of an Endpoint
+func newTestTextEndpoint(r *http.Request) (interface{}, error) {
+	return "Here's some text!", nil
+}
+
+// newTestStructEndpoint is a sample implementation of an Endpoint
+func newTestStructEndpoint(r *http.Request) (interface{}, error) {
 	return newTestStruct(), nil
 }
 

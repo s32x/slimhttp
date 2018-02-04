@@ -21,12 +21,14 @@ type Encoder func(w http.ResponseWriter, status int, res interface{})
 // encodeText encodes the response as Text and writes it to the ResponseWriter
 func encodeText(w http.ResponseWriter, status int, res interface{}) {
 	w.Header().Set(contentTypeKey, contentTypeText)
-	w.WriteHeader(status)
-	if body, ok := res.(string); ok {
-		w.Write([]byte(body))
+	body, ok := res.(string)
+	if !ok {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Response type should be string"))
 		return
 	}
-	w.Write([]byte("Response type should be string"))
+	w.WriteHeader(status)
+	w.Write([]byte(body))
 }
 
 // encodeJSON encodes the response as JSON and writes it to the ResponseWriter
@@ -39,6 +41,12 @@ func encodeJSON(w http.ResponseWriter, status int, res interface{}) {
 // encodeXML encodes the response as XML and writes it to the ResponseWriter
 func encodeXML(w http.ResponseWriter, status int, res interface{}) {
 	w.Header().Set(contentTypeKey, contentTypeXML)
+	b, err := xml.Marshal(res)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Failed to XML marshal response struct"))
+		return
+	}
 	w.WriteHeader(status)
-	xml.NewEncoder(w).Encode(res)
+	w.Write(append([]byte(xml.Header), b...))
 }
