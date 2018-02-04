@@ -3,7 +3,7 @@ package slimhttp
 import (
 	"net/http"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 )
 
 // HealthcheckService defines all functionality for a healtcheckService

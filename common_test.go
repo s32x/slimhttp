@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/gorilla/mux"
 )
 
 // testStruct is an example of a json/xml response
@@ -16,11 +14,6 @@ type testStruct struct {
 	StringKey string   `json:"string_key" xml:"stringKey"`
 	IntKey    int      `json:"int_key" xml:"intKey"`
 	FloatKey  float64  `json:"float_key" xml:"floatKey"`
-}
-
-// newTestRouter will generate a simple JSON router to test with
-func newTestRouter() *router {
-	return &router{router: mux.NewRouter()}
 }
 
 // newTestStruct generates a lightly populated TestStruct for

@@ -1,11 +1,11 @@
-hash: 853e18e6f79a7a2408f7ff6ed26963bf856de085efc9905a585aa3103f4c64cd
-updated: 2018-02-03T13:44:42.535986-07:00
+hash: b774f2ab03d363fc042b17a4dfe1c590495ba7d08b8408062a85c9aff50b7f07
+updated: 2018-02-03T21:41:38.294881-07:00
 imports:
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/mux
   version: c0091a029979286890368b4c7b301261e448e242
-- name: github.com/Sirupsen/logrus
+- name: github.com/sirupsen/logrus
   version: 768a92a02685ee7535069fc1581341b41bab9b72
 - name: golang.org/x/crypto
   version: 1875d0a70c90e57f11972aefd42276df65e895b9

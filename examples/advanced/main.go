@@ -3,9 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/Sirupsen/logrus"
-
 	"github.com/sdwolfe32/slimhttp"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {

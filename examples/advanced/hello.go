@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/gorilla/mux"
 	"github.com/sdwolfe32/slimhttp"
+	"github.com/sirupsen/logrus"
 )
 
 // HelloService defines all functionality for a helloService

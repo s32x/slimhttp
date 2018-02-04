@@ -7,6 +7,16 @@ import (
 	"testing"
 )
 
+func TestEncodeText(t *testing.T) {
+	wr := httptest.NewRecorder()
+	encodeText(wr, http.StatusOK, "Here's some text!")
+
+	body, status, err := result(wr)
+	equal(t, err, nil)
+	equal(t, status, 200)
+	equal(t, body, "Here's some text!")
+}
+
 func TestEncodeJSON(t *testing.T) {
 	wr := httptest.NewRecorder()
 	encodeJSON(wr, http.StatusOK, newTestStruct())
