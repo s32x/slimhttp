@@ -23,7 +23,7 @@ This is only the beginning for this project. I understand it is extremely basic 
 
 ## Usage Example
 
-```
+```go
 package main
 
 import (
