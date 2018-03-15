@@ -54,6 +54,19 @@ func encodeText(w http.ResponseWriter, status int, res interface{}) {
 	fmt.Fprint(w, body)
 }
 
+// encodeBytes expects a res interface of type io.Reader and copies
+// the bytes read from the reader to the ResponseWriter
+func encodeBytes(w http.ResponseWriter, status int, res interface{}) {
+	body, ok := res.([]byte)
+	if !ok {
+		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprint(w, "Response type should be ([]byte)")
+		return
+	}
+	w.WriteHeader(status)
+	w.Write(body)
+}
+
 // Webpage represents an HTML webpage response. It contains a template
 // and data to be written into the template
 type Webpage struct {

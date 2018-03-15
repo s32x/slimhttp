@@ -1,20 +1,20 @@
 hash: b774f2ab03d363fc042b17a4dfe1c590495ba7d08b8408062a85c9aff50b7f07
-updated: 2018-02-04T14:23:09.035339-07:00
+updated: 2018-03-14T17:14:52.310452-07:00
 imports:
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/mux
-  version: c0091a029979286890368b4c7b301261e448e242
+  version: 4dbd923b0c9e99ff63ad54b0e9705ff92d3cdb06
 - name: github.com/sirupsen/logrus
-  version: 768a92a02685ee7535069fc1581341b41bab9b72
+  version: c155da19408a8799da419ed3eeb0cb5db0ad5dbc
 - name: golang.org/x/crypto
-  version: 1875d0a70c90e57f11972aefd42276df65e895b9
+  version: 21652f85b0fdddb6c2b6b77a5beca5c5a908174a
   subpackages:
   - acme
   - acme/autocert
   - ssh/terminal
 - name: golang.org/x/sys
-  version: 37707fdb30a5b38865cfb95e5aab41707daec7fd
+  version: 89ac7f292d17a339edab4de8efcba5d8672ff661
   subpackages:
   - unix
   - windows

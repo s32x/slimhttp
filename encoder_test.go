@@ -36,6 +36,16 @@ func TestEncodeText(t *testing.T) {
 	equal(t, body, "Here's some text!")
 }
 
+func TestEncodeBytes(t *testing.T) {
+	wr := httptest.NewRecorder()
+	encodeBytes(wr, http.StatusOK, []byte("Here's some text!"))
+
+	body, status, err := result(wr)
+	equal(t, err, nil)
+	equal(t, status, 200)
+	equal(t, body, "Here's some text!")
+}
+
 func TestEncodeHTML(t *testing.T) {
 	wr := httptest.NewRecorder()
 	encodeHTML(wr, http.StatusOK, newTestWebpage())
