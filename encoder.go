@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
+	"html/template"
 	"net/http"
-	"text/template"
 )
 
 const (
