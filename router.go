@@ -64,6 +64,11 @@ func (r *Router) HandleTextEndpoint(pattern string, endpoint Endpoint) *mux.Rout
 	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeText))
 }
 
+// HandleBytesEndpoint binds a new Bytes Endpoint handler to the router
+func (r *Router) HandleBytesEndpoint(pattern string, endpoint Endpoint) *mux.Route {
+	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeBytes))
+}
+
 // HandleHTMLEndpoint binds a new HTML Endpoint handler to the router
 func (r *Router) HandleHTMLEndpoint(pattern string, endpoint Endpoint) *mux.Route {
 	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeHTML))
