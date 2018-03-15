@@ -7,19 +7,30 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	cache "github.com/patrickmn/go-cache"
 	"golang.org/x/crypto/acme/autocert"
 )
 
-// Router contains an mux.Router that we can use to bind Endpoints to
+// Router contains an mux.Router that we can use to bind Endpoints
 type Router struct {
-	Router *mux.Router
-	Server *http.Server
+	Router    *mux.Router
+	Server    *http.Server
+	Cache     *cache.Cache
+	URLSigner *URLSigner
 }
 
-// NewRouter generates a new router containing a mux.Router and
-// an http.Server containing a default timeout of 30 seconds for
-// reading/writing
-func NewRouter() *Router {
+// NewDefaultRouter generates a basic default router with some
+// standard parameters
+func NewDefaultRouter() *Router {
+	r := NewBaseRouter()
+	r.SetTimeout(30*time.Second, 30*time.Second)
+	r.SetCache(5*time.Minute, 10*time.Minute)
+	r.SetURLSigner("")
+	return r
+}
+
+// NewBaseRouter generates a new Router instance with a basic Router
+func NewBaseRouter() *Router {
 	return &Router{
 		Router: mux.NewRouter(),
 		Server: &http.Server{
@@ -29,49 +40,26 @@ func NewRouter() *Router {
 	}
 }
 
-// WithTimeout sets a custom read and write timeout on the routers
+// SetTimeout sets a custom read and write timeout on the routers
 // http.Server
-func (r *Router) WithTimeout(read, write time.Duration) *Router {
+func (r *Router) SetTimeout(read, write time.Duration) {
 	r.Server.ReadTimeout = read
 	r.Server.WriteTimeout = write
-	return r
 }
 
-// HandleStatic binds a new fileserver using the passed prefix and
-// path to the router
-func (r *Router) HandleStatic(prefix, path string) *mux.Route {
-	fs := http.FileServer(http.Dir(path))
-	return r.Router.PathPrefix(prefix).Handler(http.StripPrefix(prefix, fs))
+// SetCache sets a custom default expiration and cleanup interval
+// in a new cache on the Router
+func (r *Router) SetCache(defaultExpiration, cleanupInterval time.Duration) {
+	r.Cache = cache.New(defaultExpiration, cleanupInterval)
 }
 
-// HandleEndpoint binds a new Endpoint and Encoder handler to the router
-func (r *Router) HandleEndpoint(pattern string, endpoint Endpoint, encoder Encoder) *mux.Route {
-	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encoder))
-}
-
-// HandleJSONEndpoint binds a new JSON Endpoint handler to the router
-func (r *Router) HandleJSONEndpoint(pattern string, endpoint Endpoint) *mux.Route {
-	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeJSON))
-}
-
-// HandleXMLEndpoint binds a new XML Endpoint handler to the router
-func (r *Router) HandleXMLEndpoint(pattern string, endpoint Endpoint) *mux.Route {
-	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeXML))
-}
-
-// HandleTextEndpoint binds a new Text Endpoint handler to the router
-func (r *Router) HandleTextEndpoint(pattern string, endpoint Endpoint) *mux.Route {
-	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeText))
-}
-
-// HandleBytesEndpoint binds a new Bytes Endpoint handler to the router
-func (r *Router) HandleBytesEndpoint(pattern string, endpoint Endpoint) *mux.Route {
-	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeBytes))
-}
-
-// HandleHTMLEndpoint binds a new HTML Endpoint handler to the router
-func (r *Router) HandleHTMLEndpoint(pattern string, endpoint Endpoint) *mux.Route {
-	return r.Router.HandleFunc(pattern, endpointWrapper(endpoint, encodeHTML))
+// SetURLSigner sets a new custom URL Signer with a custom secret
+func (r *Router) SetURLSigner(secret string) {
+	if secret == "" {
+		r.URLSigner = NewURLSigner()
+		return
+	}
+	r.URLSigner = NewURLSignerFromSecret(secret)
 }
 
 // ListenAndServe assigns the router and address to the routers

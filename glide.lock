@@ -1,12 +1,16 @@
-hash: b774f2ab03d363fc042b17a4dfe1c590495ba7d08b8408062a85c9aff50b7f07
-updated: 2018-03-14T17:14:52.310452-07:00
+hash: d9a6c5a16a8c3a8d8a2115ddab72d52b2f8e8f23aeecd7a02d10964cd5c51240
+updated: 2018-03-14T20:37:01.046976-07:00
 imports:
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/mux
   version: 4dbd923b0c9e99ff63ad54b0e9705ff92d3cdb06
+- name: github.com/patrickmn/go-cache
+  version: a3647f8e31d79543b2d0f0ae2fe5c379d72cedc0
+- name: github.com/satori/go.uuid
+  version: 36e9d2ebbde5e3f13ab2e25625fd453271d6522e
 - name: github.com/sirupsen/logrus
-  version: c155da19408a8799da419ed3eeb0cb5db0ad5dbc
+  version: 90150a8ed11b6ce285e77e8af2b0109559ce4777
 - name: golang.org/x/crypto
   version: 21652f85b0fdddb6c2b6b77a5beca5c5a908174a
   subpackages:

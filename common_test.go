@@ -2,10 +2,10 @@ package slimhttp
 
 import (
 	"encoding/xml"
+	"html/template"
 	"io/ioutil"
 	"net/http/httptest"
 	"testing"
-	"text/template"
 )
 
 // testStruct is an example of a json/xml response
