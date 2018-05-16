@@ -6,12 +6,12 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/entrik/slimhttp"
 	"github.com/gorilla/mux"
-	"github.com/sdwolfe32/slimhttp"
 )
 
 func main() {
-	r := slimhttp.NewRouter()                                // Create a new router
+	r := slimhttp.NewBaseRouter()                            // Create a new router
 	r.HandleJSONEndpoint("/hello/{name}", Hello)             // Bind an Endpoint to the router at the specified path
 	log.Fatal(r.ListenAndServeFreeTLS("hello.com", "certs")) // Start the service with LetsEncrypt certs!
 }

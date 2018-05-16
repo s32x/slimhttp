@@ -1,24 +1,24 @@
-hash: d9a6c5a16a8c3a8d8a2115ddab72d52b2f8e8f23aeecd7a02d10964cd5c51240
-updated: 2018-03-14T20:37:01.046976-07:00
+hash: 35421d741bba8b3696413f5791dfbd02b124c856a11de539bedfcf5b7d4f5dfe
+updated: 2018-05-16T01:01:54.775029-07:00
 imports:
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/mux
-  version: 4dbd923b0c9e99ff63ad54b0e9705ff92d3cdb06
+  version: e3702bed27f0d39777b0b37b664b6280e8ef8fbf
 - name: github.com/patrickmn/go-cache
   version: a3647f8e31d79543b2d0f0ae2fe5c379d72cedc0
 - name: github.com/satori/go.uuid
   version: 36e9d2ebbde5e3f13ab2e25625fd453271d6522e
 - name: github.com/sirupsen/logrus
-  version: 90150a8ed11b6ce285e77e8af2b0109559ce4777
+  version: 0dad3b6953e73d351ec8ebfd8a8c6b088d320381
 - name: golang.org/x/crypto
-  version: 21652f85b0fdddb6c2b6b77a5beca5c5a908174a
+  version: 1a580b3eff7814fc9b40602fd35256c63b50f491
   subpackages:
   - acme
   - acme/autocert
   - ssh/terminal
 - name: golang.org/x/sys
-  version: 89ac7f292d17a339edab4de8efcba5d8672ff661
+  version: 7c87d13f8e835d2fb3a70a2912c811ed0c1d241b
   subpackages:
   - unix
   - windows

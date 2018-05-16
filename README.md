@@ -1,9 +1,7 @@
-slimhttp is currently being used in production at [Trumail](https://trumail.io) and [Ovrstat](https://github.com/sdwolfe32/ovrstat)
-
 # slimhttp 
 
-[![CircleCI](https://circleci.com/gh/sdwolfe32/slimhttp.svg?style=svg)](https://circleci.com/gh/sdwolfe32/slimhttp)
-[![GoDoc](https://godoc.org/github.com/sdwolfe32/slimhttp?status.svg)](https://godoc.org/github.com/sdwolfe32/slimhttp)
+[![CircleCI](https://circleci.com/gh/entrik/slimhttp.svg?style=svg)](https://circleci.com/gh/entrik/slimhttp)
+[![GoDoc](https://godoc.org/github.com/entrik/slimhttp?status.svg)](https://godoc.org/github.com/entrik/slimhttp)
 
 slimhttp is a simple API library used for writing JSON/XML services quickly and easily. It was written with the aim of providing a go-kit like service definition (slimhttp.Endpoint) while avoiding all the extra RPC logic and encoder/decoder interfaces. The purpose of this project is to implement of a lot of the basic boilerplate associated with writing API services so that you can focus on writing business logic.
 
@@ -33,7 +31,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/sdwolfe32/slimhttp"
+	"github.com/entrik/slimhttp"
 )
 
 func main() {
@@ -81,7 +79,7 @@ func Hello(r *http.Request) (interface{}, error) {
 The MIT License (MIT)
 =====================
 
-Copyright © 2018 Steven Wolfe
+Copyright © 2018 Entrik LLC
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

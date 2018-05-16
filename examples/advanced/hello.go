@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/sdwolfe32/slimhttp"
+	"github.com/entrik/slimhttp"
 	"github.com/sirupsen/logrus"
 )
 

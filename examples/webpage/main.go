@@ -3,16 +3,16 @@ package main
 import (
 	"errors"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
-	"text/template"
 
+	"github.com/entrik/slimhttp"
 	"github.com/gorilla/mux"
-	"github.com/sdwolfe32/slimhttp"
 )
 
 func main() {
-	r := slimhttp.NewRouter()                    // Create a new router
+	r := slimhttp.NewBaseRouter()                // Create a new router
 	r.HandleHTMLEndpoint("/hello/{name}", Hello) // Bind an Endpoint to the router at the specified path
 	log.Fatal(r.ListenAndServe(8080))            // Start the service!
 }

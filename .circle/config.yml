@@ -1,9 +1,9 @@
 version: 2
 jobs:
   build:
-    working_directory: /go/src/github.com/sdwolfe32/slimhttp
+    working_directory: /go/src/github.com/entrik/slimhttp
     docker:
-      - image: circleci/golang:1.9.3
+      - image: circleci/golang:1.10.2
     steps:
       - checkout
       - run:

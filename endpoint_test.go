@@ -8,7 +8,8 @@ import (
 
 func TestJSONEndpointWrapper(t *testing.T) {
 	wr := httptest.NewRecorder()
-	handler := endpointWrapper(func(r *http.Request) (interface{}, error) {
+	r := NewBaseRouter()
+	handler := r.endpointWrapper(func(r *http.Request) (interface{}, error) {
 		return newTestStruct(), nil
 	}, encodeJSON)
 	handler(wr, nil)
@@ -20,7 +21,8 @@ func TestJSONEndpointWrapper(t *testing.T) {
 
 func TestXMLEndpointWrapper(t *testing.T) {
 	wr := httptest.NewRecorder()
-	handler := endpointWrapper(func(r *http.Request) (interface{}, error) {
+	r := NewBaseRouter()
+	handler := r.endpointWrapper(func(r *http.Request) (interface{}, error) {
 		return newTestStruct(), nil
 	}, encodeXML)
 	handler(wr, nil)
@@ -32,7 +34,8 @@ func TestXMLEndpointWrapper(t *testing.T) {
 
 func TestTextEndpointWrapper(t *testing.T) {
 	wr := httptest.NewRecorder()
-	handler := endpointWrapper(func(r *http.Request) (interface{}, error) {
+	r := NewBaseRouter()
+	handler := r.endpointWrapper(func(r *http.Request) (interface{}, error) {
 		return "Here's some text!", nil
 	}, encodeText)
 	handler(wr, nil)
@@ -44,7 +47,8 @@ func TestTextEndpointWrapper(t *testing.T) {
 
 func TestHTMLEndpointWrapper(t *testing.T) {
 	wr := httptest.NewRecorder()
-	handler := endpointWrapper(func(r *http.Request) (interface{}, error) {
+	r := NewBaseRouter()
+	handler := r.endpointWrapper(func(r *http.Request) (interface{}, error) {
 		return newTestWebpage(), nil
 	}, encodeHTML)
 	handler(wr, nil)

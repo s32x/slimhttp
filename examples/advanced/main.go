@@ -3,13 +3,13 @@ package main
 import (
 	"log"
 
-	"github.com/sdwolfe32/slimhttp"
+	"github.com/entrik/slimhttp"
 	"github.com/sirupsen/logrus"
 )
 
 func main() {
 	// Create a new router
-	r := slimhttp.NewRouter()
+	r := slimhttp.NewBaseRouter()
 
 	logger := logrus.New()
 	s := NewHelloService(logger)
