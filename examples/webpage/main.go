@@ -7,8 +7,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/entrik/slimhttp"
 	"github.com/gorilla/mux"
+	"github.com/s32x/slimhttp"
 )
 
 func main() {

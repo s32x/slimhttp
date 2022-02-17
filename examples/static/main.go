@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/entrik/slimhttp"
+	"github.com/s32x/slimhttp"
 )
 
 func main() {

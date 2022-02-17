@@ -21,8 +21,7 @@ type URLSigner struct{ secret string }
 
 // NewURLSigner creates a new URLSigner instance
 func NewURLSigner() *URLSigner {
-	secret, _ := uuid.NewV4()
-	return &URLSigner{secret: secret.String()}
+	return &URLSigner{secret: uuid.NewV4().String()}
 }
 
 // NewURLSignerFromSecret creates a new URSigner instance

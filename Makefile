@@ -1,10 +1,8 @@
-glide:
-	-rm glide.lock
-	-rm glide.yaml
-	-rm -r vendor
-	glide cache-clear
-	glide init --non-interactive
-	glide install
-
+deps:
+	-rm -rf ./vendor go.mod go.sum
+	go mod init
+	go mod tidy
+	go mod vendor
+	
 test:
-	go test
+	go test ./...
